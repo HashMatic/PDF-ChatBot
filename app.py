@@ -10,7 +10,6 @@ from langchain.llms import OpenAI
 from langchain.chains.question_answering import load_qa_chain
 from langchain.callbacks import get_openai_callback
 import os
-#import openai 
  
 # Sidebar contents
 with st.sidebar:
@@ -20,16 +19,18 @@ with st.sidebar:
     This app is an LLM-powered chatbot built using:
     - [Streamlit](https://streamlit.io/)
     - [LangChain](https://python.langchain.com/)
-    - [OpenAI](https://platform.openai.com/docs/models) LLM model
+    - [OpenAI](https://platform.openai.com/docs/models)
+    - [LLM Models](https://www.geeksforgeeks.org/large-language-model-llm/) 
  
     ''')
-    add_vertical_space(5)
-    st.write('Made by Abhishek Singh')
  
 def main():
     st.header("Chat with PDF 💬")
 
     load_dotenv()
+
+     # Load the API key from the environment variable
+    embeddings = OpenAIEmbeddings(api_key=os.getenv("OPENAI_API_KEY"))
  
     # upload a PDF file
     pdf = st.file_uploader("Upload your PDF", type='pdf')
@@ -63,10 +64,6 @@ def main():
             VectorStore = FAISS.from_texts(chunks, embedding=embeddings)
             with open(f"{store_name}.pkl", "wb") as f:
                 pickle.dump(VectorStore, f)
- 
-        # embeddings
-        # embeddings = OpenAIEmbeddings()
-        # VectorStore = FAISS.from_texts(chunks, embedding=embeddings)
 
         # Accept user questions/query
         query = st.text_input("Ask questions about your PDF file:")
