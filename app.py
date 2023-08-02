@@ -10,6 +10,7 @@ from langchain.llms import OpenAI
 from langchain.chains.question_answering import load_qa_chain
 from langchain.callbacks import get_openai_callback
 import os
+from streamlit_chat import message as st_message
 
 # Sidebar contents
 with st.sidebar:
@@ -21,7 +22,6 @@ with st.sidebar:
     - [LangChain](https://python.langchain.com/)
     - [OpenAI](https://platform.openai.com/docs/models)
     - [LLM Models](https://www.geeksforgeeks.org/large-language-model-llm/) 
-
     ''')
 
 def main():
@@ -34,6 +34,10 @@ def main():
 
     # upload a PDF file
     pdf = st.file_uploader("Upload your PDF", type='pdf')
+
+    # Initialize session state
+    if 'messages' not in st.session_state:
+        st.session_state.messages = []
 
     # st.write(pdf)
     if pdf is not None:
@@ -50,7 +54,7 @@ def main():
             )
         chunks = text_splitter.split_text(text=text)
 
-        # # embeddings
+        # embeddings
         store_name = pdf.name[:-4]
         st.write(f'{store_name}')
         # st.write(chunks)
@@ -58,7 +62,7 @@ def main():
         if os.path.exists(f"{store_name}.pkl"):
             with open(f"{store_name}.pkl", "rb") as f:
                 VectorStore = pickle.load(f)
-            # st.write('Embeddings Loaded from the Disk')s
+            # st.write('Embeddings Loaded from the Disk')
         else:
             embeddings = OpenAIEmbeddings()
             VectorStore = FAISS.from_texts(chunks, embedding=embeddings)
@@ -67,7 +71,6 @@ def main():
 
         # Accept user questions/query
         query = st.text_input("Ask questions about your PDF file:")
-        # st.write(query)
 
         if query:
             docs = VectorStore.similarity_search(query=query, k=3)
@@ -76,9 +79,21 @@ def main():
             chain = load_qa_chain(llm=llm, chain_type="stuff")
             with get_openai_callback() as cb:
                 response = chain.run(input_documents=docs, question=query)
-                print(cb)
-                
-            st.write(response)
+
+            # Check if the bot's response is relevant to the PDF content
+            if "I don't know." in response:
+                response = "Please ask a question related to the content of the PDF."    
+            
+            # Update the conversation history with user's question and bot's response
+            st.session_state.messages.insert(0, {"role": "user", "content": query})
+            st.session_state.messages.insert(1, {"role": "assistant", "content": response})
+
+    # Display the chat conversation using streamlit_chat
+    for msg in st.session_state.messages:
+        if msg['role'] == 'user':
+            st_message(msg['content'], is_user=True)
+        else:
+            st_message(msg['content'])
 
 if __name__ == '__main__':
     main()
