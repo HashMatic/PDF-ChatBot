@@ -19,15 +19,16 @@ Key Features-
 
 ## Table Of Contents
 
- - [Installation]()
- - [Usage]()
- - [Acknowledgements]()
- - [Technologies Used]()
- - [Code Description]()
- - [Screenshots]()
- - [Future Scope]()
- - [Contributing]()
- - [License]()
+ - [Installation](https://github.com/abhisheksingh-17/PDF-ChatBot/tree/main#installation)
+ - [Usage](https://github.com/abhisheksingh-17/PDF-ChatBot/tree/main#usage)
+ - [Acknowledgements](https://github.com/abhisheksingh-17/PDF-ChatBot/tree/main#acknowledgements)
+ - [Technologies Used](https://github.com/abhisheksingh-17/PDF-ChatBot/tree/main#technologies-used)
+ - [Code Description](https://github.com/abhisheksingh-17/PDF-ChatBot/tree/main#code-description)
+ - [Screenshots](https://github.com/abhisheksingh-17/PDF-ChatBot/tree/main#screenshots)
+ - [Future Scope](https://github.com/abhisheksingh-17/PDF-ChatBot/tree/main#future-scope)
+ - [Contributing](https://github.com/abhisheksingh-17/PDF-ChatBot/tree/main#contributing)
+ - [License](https://github.com/abhisheksingh-17/PDF-ChatBot/tree/main#license)
+
 ## Installation
 
 To get started with the PDF Chatbot, follow these steps to set up the application environment:
@@ -372,7 +373,6 @@ This project lays the foundation for a versatile and intelligent PDF chatbot, po
 
 The future of this project holds the promise of a sophisticated and intelligent PDF chatbot that can revolutionize the way users interact with and extract information from PDF documents.
 
-Feel free to incorporate this future scope section into your README, and adapt it based on the specific directions you envision for your project's growth. If you have any other sections you'd like assistance with, please let me know!
 
 
 
