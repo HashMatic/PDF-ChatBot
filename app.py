@@ -12,6 +12,9 @@ from langchain.callbacks import get_openai_callback
 import os
 from streamlit_chat import message as st_message
 
+# Set page title and favicon
+st.set_page_config(page_title="PDF Chatbot", page_icon=":robot_face:")
+
 # Sidebar contents
 with st.sidebar:
     st.title('LLM Chatbot')

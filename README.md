@@ -156,6 +156,9 @@ This section of the code imports various Python libraries and modules that are n
 This import section ensures that all necessary functions and classes from external libraries are available for use in the PDF Chatbot application.
 
 ```python
+# Set page title and favicon
+st.set_page_config(page_title="PDF Chatbot", page_icon=":robot_face:")
+
 # Sidebar contents
 with st.sidebar:
     st.title('LLM Chatbot')
@@ -168,7 +171,9 @@ with st.sidebar:
     - [LLM Models](https://www.geeksforgeeks.org/large-language-model-llm/) 
     ''')
 ```
-Within the Streamlit app, this section adds content to the sidebar. It displays the title "LLM Chatbot" and a brief description of the app along with links to the technologies used.
+ - st.set_page_config(page_title="PDF Chatbot", page_icon=":robot_face:"): Sets the title and favicon (icon displayed on browser tabs) of the web page.
+
+ - Within the Streamlit app, this section adds content to the sidebar. It displays the title "LLM Chatbot" and a brief description of the app along with links to the technologies used.
 
 ```python
 def main():
